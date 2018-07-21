@@ -2,7 +2,7 @@ function require_test(path)
 {
     //let path = document.getElementById("path_id").value;
 	//alert(path);
-    let CTest = require(path)
+    let CTest = require(path, "CTest")
     let test = new CTest()
 
     test.TestInt32(3245);
