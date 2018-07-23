@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
 declare let require_test: any;
+declare let cordova: any;
 
 @Component({
   selector: 'page-home',
@@ -9,7 +10,7 @@ declare let require_test: any;
 })
 
 export class HomePage {
-	   carpath;
+	   carpath = "libElastos.HelloCarDemo.so";
 
   constructor(public navCtrl: NavController) {
 
@@ -19,4 +20,11 @@ export class HomePage {
 	 require_test(this.carpath);
   }
 
+  
+  require_wallet(){
+	  //console.log('Error: zhh ', "DATE require_wallet" );
+	  cordova.plugins.appmanager.StartApp("wallet/www/index.html" + "?timestamp=" + new Date().getTime(), 
+	  function (data) { }, 
+	  function (error) { });
+  }
 }
