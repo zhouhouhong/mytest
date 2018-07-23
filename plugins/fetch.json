@@ -38,5 +38,13 @@
     },
     "is_top_level": true,
     "variables": {}
+  },
+  "com.plugin.appmanager": {
+    "source": {
+      "type": "local",
+      "path": "D:\\project\\mytest2\\node_modules\\appmanager"
+    },
+    "is_top_level": true,
+    "variables": {}
   }
 }
