@@ -11,9 +11,26 @@ declare let cordova: any;
 
 export class HomePage {
 	   carpath = "libElastos.HelloCarDemo.so";
-
+	   
+  GetQueryString(name){
+    var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+    var r = window.location.search.substr(1).match(reg);
+    if(r!=null)return  decodeURI(r[2]); return null;
+  }
+  
   constructor(public navCtrl: NavController) {
-
+        let type = this.GetQueryString("type");
+          switch (type) {
+            case "payment":
+              this.carpath = this.GetQueryString("txId");
+              break;
+            case "did_login":
+              this.carpath = this.GetQueryString("didNum");
+              break;
+            default:
+              this.carpath = "libElastos.HelloCarDemo.so";;
+              break;
+          }
   }
   
   require_module(){
@@ -21,10 +38,24 @@ export class HomePage {
   }
 
   
-  require_wallet(){
+  require_DID(){
 	  //console.log('Error: zhh ', "DATE require_wallet" );
-	  cordova.plugins.appmanager.StartApp("wallet/www/index.html" + "?timestamp=" + new Date().getTime(), 
+	  cordova.plugins.appmanager.StartApp("wallet/www/index.html" + "?type=did_login&message=this is did login message&backurl=CarTest/www/index.html", 
 	  function (data) { }, 
 	  function (error) { });
   }
+  
+  require_pay(){
+	  //console.log('Error: zhh ', "DATE require_wallet" );
+	  cordova.plugins.appmanager.StartApp("wallet/www/index.html" + "?type=payment&amount=10000&address=EeDUy6TmGSFfVxXVzMpVkxLhqwCqujE1WL&memo=chinajoylottery-f-EHmMW4UVLBkr6QB61CBexUQiXvFigvDJwi-fe5d57161eb78e0d3ff5d5a24398e9aea8914f71e762f06a49cd515b45d96af2&information=sss&backurl=CarTest/www/index.html", 
+	  function (data) { }, 
+	  function (error) { });
+  }
+  
+   GetQueryString(name){
+    var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+    var r = window.location.search.substr(1).match(reg);
+    if(r!=null)return  decodeURI(r[2]); return null;
+  }
+
 }
