@@ -12,12 +12,7 @@ declare let cordova: any;
 export class HomePage {
 	   carpath = "libElastos.HelloCarDemo.so";
 	   
-  GetQueryString(name){
-    var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
-    var r = window.location.search.substr(1).match(reg);
-    if(r!=null)return  decodeURI(r[2]); return null;
-  }
-  
+
   constructor(public navCtrl: NavController) {
         let type = this.GetQueryString("type");
           switch (type) {
@@ -31,6 +26,12 @@ export class HomePage {
               this.carpath = "libElastos.HelloCarDemo.so";;
               break;
           }
+  }
+  
+  GetQueryString(name){
+    var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+    var r = window.location.search.substr(1).match(reg);
+    if(r!=null)return  decodeURI(r[2]); return null;
   }
   
   require_module(){
@@ -52,10 +53,5 @@ export class HomePage {
 	  function (error) { });
   }
   
-   GetQueryString(name){
-    var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
-    var r = window.location.search.substr(1).match(reg);
-    if(r!=null)return  decodeURI(r[2]); return null;
-  }
 
 }
